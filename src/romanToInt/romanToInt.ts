@@ -28,6 +28,8 @@
 
 */
 
+import { KeyObjectType } from "crypto";
+
 type romanType = {
   value: number;
   order: number;
@@ -167,7 +169,9 @@ export function romanToIntIV(s: string): number {
 export const romanToIntV = (s: string): number => {
   let total = 0;
 
-  const romanNumber: number[] = s.split("").map((i) => romanConvert[i]);
+  const romanNumber: number[] = s
+    .split("")
+    .map((i) => romanConvert[i as keyof typeof romanConvert]);
 
   for (let i = 0; i < romanNumber.length; i++) {
     if (romanNumber[i] < romanNumber[i + 1]) {
@@ -181,7 +185,9 @@ export const romanToIntV = (s: string): number => {
 };
 
 export const romanToIntVI = (s: string): number => {
-  const romanNumber: number[] = s.split("").map((i) => romanConvert[i]);
+  const romanNumber: number[] = s
+    .split("")
+    .map((i) => romanConvert[i as keyof typeof romanConvert]);
   return romanNumber.reduce(
     (total, currentRoman, i, romanArray) =>
       currentRoman < romanArray[i + 1]
@@ -194,7 +200,7 @@ export const romanToIntVI = (s: string): number => {
 export const romanToIntVII = (s: string): number => {
   return s
     .split("")
-    .map((i) => romanConvert[i])
+    .map((i) => romanConvert[i as keyof typeof romanConvert])
     .reduce(
       (total, currentRoman, i, romanArray) =>
         currentRoman < romanArray[i + 1]

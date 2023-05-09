@@ -1,10 +1,14 @@
-import chalk from "./../../node_modules/chalk/source/index.js";
+//@ts-ignore
+import chalk from "chalk";
+//NOTE - chalk is a pure ES Modal and ts is setup to pull in ES Modal and export js ES Modal
+//   I don't know what's wrong with it because all is set up right it just doesn't respect it
 
 const testFunction = <I, O>(
   f: (input: I) => O,
   testQuestions: { question: I; answer: O }[],
   showAllQs = true,
-  showOnlyQs = -1
+  showOnlyQs = -1,
+  showNoQs = false
 ) => {
   console.log("\n=== Running Tests on function: " + f.name + " ===");
 
@@ -15,12 +19,16 @@ const testFunction = <I, O>(
   testQuestions.forEach((qAndA, at) => {
     // time test
     const startTime = performance.now();
+    console.log("this is test one");
     f(qAndA.question);
+    console.log(qAndA.question);
     const endTime = performance.now();
     const elapsed = endTime - startTime;
     // memory test
     const startMemoryUsage = process.memoryUsage().heapUsed;
+    console.log("this is test two");
     f(qAndA.question);
+    console.log(qAndA.question);
     const endMemoryUsage = process.memoryUsage().heapUsed;
     const delta = endMemoryUsage - startMemoryUsage;
     // result of the function
@@ -29,35 +37,37 @@ const testFunction = <I, O>(
     totalElapsed += elapsed;
     if (result === qAndA.answer) totalComplete++;
 
-    if (showAllQs) {
-      console.log(
-        `=================\nQuestion: ${at + 1}\n${
-          result === qAndA.answer
-            ? chalk.greenBright("Passed")
-            : chalk.redBright("Failed")
-        }\nResult: ${chalk.yellow(result)}\nAnswer: ${chalk.yellow(
-          qAndA.answer
-        )}\nDelta: ${chalk.yellow(delta)} bits\nTime: ${chalk.yellow(
-          elapsed
-        )} ms`
-      );
-    }
-    if (showOnlyQs === at) {
-      console.log(
-        `=================\nQuestion: ${at + 1}\n${
-          result === qAndA.answer
-            ? chalk.greenBright("Passed")
-            : chalk.redBright("Failed")
-        }\nResult: ${chalk.yellow(result)}\nAnswer: ${chalk.yellow(
-          qAndA.answer
-        )}\nDelta: ${chalk.yellow(delta)} bits\nTime: ${chalk.yellow(
-          elapsed
-        )} ms`
-      );
+    if (!showNoQs) {
+      if (showAllQs) {
+        console.log(
+          `=================\nQuestion: ${at + 1}\n${
+            result === qAndA.answer
+              ? chalk.greenBright("Passed")
+              : chalk.redBright("Failed")
+          }\nResult: ${chalk.yellow(result)}\nAnswer: ${chalk.yellow(
+            qAndA.answer
+          )}\nDelta: ${chalk.yellow(delta)} bits\nTime: ${chalk.yellow(
+            elapsed
+          )} ms`
+        );
+      }
+      if (showOnlyQs === at) {
+        console.log(
+          `=================\nQuestion: ${at + 1}\n${
+            result === qAndA.answer
+              ? chalk.greenBright("Passed")
+              : chalk.redBright("Failed")
+          }\nResult: ${chalk.yellow(result)}\nAnswer: ${chalk.yellow(
+            qAndA.answer
+          )}\nDelta: ${chalk.yellow(delta)} bits\nTime: ${chalk.yellow(
+            elapsed
+          )} ms`
+        );
+      }
     }
   });
   console.log(
-    `Functions : ${f.name}\nTotal Pass/Failed: ${totalComplete}/${testQuestions.length}\nTotal delta: ${totalDelta} bits\nTotal elapsed: ${totalElapsed} ms`
+    `\nFunctions : ${f.name}\nTotal Pass/Failed: ${totalComplete}/${testQuestions.length}\nTotal delta: ${totalDelta} bits\nTotal elapsed: ${totalElapsed} ms`
   );
 };
 

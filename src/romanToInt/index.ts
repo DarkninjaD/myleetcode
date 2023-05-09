@@ -1,5 +1,5 @@
-import * as myRomanToInt from "./romanToInt";
-import testFunction from "./../utils/testFunction";
+import * as myRomanToInt from "./romanToInt.js";
+import testFunction from "./../utils/testFunction.js";
 
 const romanToInt = () => {
   testFunction(myRomanToInt.romanToIntI, testQuestions);
