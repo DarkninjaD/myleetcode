@@ -5,7 +5,7 @@ const containsDuplicate = () => {
   testFunction(my.containsDuplicateI, testQuestions, true, -1, true);
   testFunction(my.containsDuplicateII, testQuestions, true, -1, true);
   testFunction(my.containsDuplicateIII, testQuestions, true, -1, true);
-  testFunction(my.containsDuplicateIV, testQuestions, true, -1, false);
+  testFunction(my.containsDuplicateIV, testQuestions);
 };
 
 const testQuestions = [

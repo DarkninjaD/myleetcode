@@ -48,8 +48,8 @@ export const containsDuplicateIV = (nums: number[]): boolean => {
     console.log(test);
     console.log("q's" + nums);
     if (test) {
-      return true;
+      return false;
     }
   }
-  return false;
+  return true;
 };
