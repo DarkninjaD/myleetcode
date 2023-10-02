@@ -1,5 +1,6 @@
 export const containsDuplicateI = (nums: number[]): boolean => {
   const noDup = new Set();
+  if (!Array.isArray(nums)) console.log(typeof nums);
   return nums.some((num) => {
     if (noDup.size + 1 !== noDup.add(num).size) return true;
   });

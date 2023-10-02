@@ -21,12 +21,13 @@ const testFunction = <I, O>(
   testQuestions.forEach((qAndA, at) => {
     // time test
     const startTime = performance.now();
-    f({ ...qAndA.question });
+    let passInQuestions = [...qAndA.question];
+    f([...qAndA.question]);
     const endTime = performance.now();
     const elapsed = endTime - startTime;
     // memory test
     const startMemoryUsage = process.memoryUsage().heapUsed;
-    f({ ...qAndA.question });
+    f([...qAndA.question]);
     const endMemoryUsage = process.memoryUsage().heapUsed;
     const delta = endMemoryUsage - startMemoryUsage;
     // result of the function
