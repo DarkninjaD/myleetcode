@@ -3,8 +3,6 @@
  */
 package kotlinleetcode
 
-import validUtf8
-
 class App {
     val greeting: String
         get() {
@@ -14,8 +12,5 @@ class App {
 
 fun main() {
     println(App().greeting)
-    val data = arrayOf(235,140,4)
-    val data2 = arrayOf(255)
-    println(validUtf8(data))
-    println(validUtf8(data2))
+
 }
