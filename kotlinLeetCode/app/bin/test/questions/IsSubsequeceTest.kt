@@ -14,7 +14,8 @@ class isSubsequenceTest {
 
     @Test
     fun `Example-2 is 'axc' a isSubsequence of 'ahbgdc', false `() {
-        assertFalse(testSolution("axc", "ahbgdc"))
+        val testSolution = Solution()
+        assertFalse(testSolution.isSubsequence("axc", "ahbgdc"))
     }
 
     @Test

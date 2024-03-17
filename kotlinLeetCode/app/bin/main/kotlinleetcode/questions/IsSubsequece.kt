@@ -10,8 +10,6 @@ package kotlinleetcode.questions.isSubsequence
 
 class Solution {
 
-
-
   fun isSubsequence(s: String, t: String): Boolean {
     var lastKnow : Int? = null
     if(t.contains(s)) return true
